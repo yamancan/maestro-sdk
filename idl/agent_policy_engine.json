@@ -1,0 +1,4216 @@
+{
+  "address": "BFLP2j3M32pvmnhuF6uDrGPAL7DYctWQqG1UwgzXdrSt",
+  "metadata": {
+    "name": "agent_policy_engine",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Agentic Policy Engine on Solana, on-chain policy enforcement for AI agent wallets"
+  },
+  "instructions": [
+    {
+      "name": "add_blacklist",
+      "discriminator": [
+        217,
+        13,
+        249,
+        96,
+        5,
+        121,
+        73,
+        110
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "blacklist_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "address"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "add_greenlist",
+      "discriminator": [
+        114,
+        57,
+        190,
+        160,
+        142,
+        218,
+        118,
+        135
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "greenlist_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "entry_pubkey"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "entry_pubkey",
+          "type": "pubkey"
+        },
+        {
+          "name": "swap_only",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "add_swap_pair",
+      "discriminator": [
+        49,
+        83,
+        237,
+        255,
+        106,
+        125,
+        239,
+        114
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "swap_pair_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  119,
+                  97,
+                  112,
+                  95,
+                  112,
+                  97,
+                  105,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "mint_a"
+              },
+              {
+                "kind": "arg",
+                "path": "mint_b"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "mint_a",
+          "type": "pubkey"
+        },
+        {
+          "name": "mint_b",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "add_whitelist",
+      "discriminator": [
+        215,
+        46,
+        143,
+        176,
+        108,
+        113,
+        24,
+        1
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "whitelist_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  104,
+                  105,
+                  116,
+                  101,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "address"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "close_recipient_policy",
+      "discriminator": [
+        175,
+        169,
+        6,
+        251,
+        26,
+        15,
+        11,
+        36
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "recipient_policy"
+          ]
+        },
+        {
+          "name": "recipient_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116,
+                  95,
+                  112,
+                  111,
+                  108,
+                  105,
+                  99,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "recipient"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "recipient",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "close_session_key",
+      "discriminator": [
+        73,
+        161,
+        117,
+        185,
+        58,
+        70,
+        184,
+        136
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "session_key"
+          ]
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_spent_tracker",
+      "discriminator": [
+        49,
+        95,
+        98,
+        50,
+        68,
+        173,
+        14,
+        10
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "docs": [
+            "Receives the rent refund."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_vault",
+      "discriminator": [
+        141,
+        103,
+        17,
+        126,
+        72,
+        75,
+        29,
+        29
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "relations": [
+            "vault_config"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_recipient_policy",
+      "discriminator": [
+        228,
+        205,
+        14,
+        18,
+        149,
+        105,
+        178,
+        9
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "recipient_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116,
+                  95,
+                  112,
+                  111,
+                  108,
+                  105,
+                  99,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "recipient"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "recipient",
+          "type": "pubkey"
+        },
+        {
+          "name": "per_tx_limit_usdc",
+          "type": "u64"
+        },
+        {
+          "name": "daily_limit_usdc",
+          "type": "u64"
+        },
+        {
+          "name": "mode",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "create_session_key",
+      "discriminator": [
+        137,
+        204,
+        246,
+        242,
+        200,
+        143,
+        215,
+        56
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "session_key",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "agent"
+              },
+              {
+                "kind": "account",
+                "path": "vault.session_counter",
+                "account": "Vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "agent",
+          "type": "pubkey"
+        },
+        {
+          "name": "valid_after",
+          "type": "i64"
+        },
+        {
+          "name": "valid_until",
+          "type": "i64"
+        },
+        {
+          "name": "spending_limit_usdc",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "create_vault",
+      "discriminator": [
+        29,
+        237,
+        247,
+        208,
+        193,
+        82,
+        54,
+        135
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "vault_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vault_index",
+          "type": "u64"
+        },
+        {
+          "name": "usdc_mint",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "execute_action",
+      "discriminator": [
+        246,
+        137,
+        105,
+        113,
+        247,
+        6,
+        223,
+        174
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "vault_config",
+            "session_key",
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        },
+        {
+          "name": "target_blacklist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_greenlist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ExecuteActionParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "execute_action_cosigned",
+      "discriminator": [
+        159,
+        199,
+        210,
+        227,
+        191,
+        95,
+        119,
+        114
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "vault_config",
+            "session_key",
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        },
+        {
+          "name": "target_blacklist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_greenlist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ExecuteActionParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "execute_action_swap",
+      "discriminator": [
+        98,
+        64,
+        32,
+        238,
+        53,
+        154,
+        148,
+        54
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "vault_config",
+            "session_key",
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        },
+        {
+          "name": "target_blacklist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_greenlist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_program"
+        },
+        {
+          "name": "vault_input_token_account",
+          "docs": [
+            "Vault's input token account (will be debited by the DEX).",
+            "Anchor verifies this token account is owned by the vault PDA."
+          ],
+          "writable": true
+        },
+        {
+          "name": "vault_output_token_account",
+          "docs": [
+            "Vault's output token account (will be credited by the DEX).",
+            "Anchor verifies this token account is owned by the vault PDA."
+          ],
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ExecuteSwapParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "execute_action_swap_cosigned",
+      "discriminator": [
+        92,
+        118,
+        52,
+        172,
+        185,
+        75,
+        246,
+        98
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "vault_config",
+            "session_key",
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        },
+        {
+          "name": "target_blacklist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_greenlist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "target_program"
+              }
+            ]
+          }
+        },
+        {
+          "name": "target_program"
+        },
+        {
+          "name": "vault_input_token_account",
+          "docs": [
+            "Vault's input token account (will be debited by the DEX)."
+          ],
+          "writable": true
+        },
+        {
+          "name": "vault_output_token_account",
+          "docs": [
+            "Vault's output token account (will be credited by the DEX)."
+          ],
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ExecuteSwapParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "execute_action_transfer",
+      "discriminator": [
+        130,
+        176,
+        83,
+        155,
+        166,
+        10,
+        19,
+        60
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "vault_config",
+            "session_key",
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        },
+        {
+          "name": "vault_source_ata",
+          "docs": [
+            "Vault's source token account (debited by transfer)."
+          ],
+          "writable": true
+        },
+        {
+          "name": "destination_ata",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "token_blacklist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_greenlist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ExecuteTransferParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "execute_action_transfer_cosigned",
+      "discriminator": [
+        198,
+        50,
+        72,
+        200,
+        0,
+        32,
+        233,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "agent",
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          },
+          "relations": [
+            "vault_config",
+            "session_key",
+            "spending_tracker"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true
+        },
+        {
+          "name": "vault_source_ata",
+          "docs": [
+            "Vault's source token account (debited by transfer)."
+          ],
+          "writable": true
+        },
+        {
+          "name": "destination_ata",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "token_blacklist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_greenlist_check",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ExecuteTransferParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "freeze_vault",
+      "discriminator": [
+        144,
+        211,
+        63,
+        236,
+        97,
+        31,
+        170,
+        175
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_tracker",
+      "discriminator": [
+        92,
+        153,
+        116,
+        105,
+        78,
+        25,
+        241,
+        33
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_index",
+                "account": "Vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "spending_tracker",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  99,
+                  107,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "day_epoch"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "day_epoch",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "remove_blacklist",
+      "discriminator": [
+        39,
+        82,
+        241,
+        133,
+        41,
+        2,
+        161,
+        21
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "blacklist_entry"
+          ]
+        },
+        {
+          "name": "blacklist_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  97,
+                  99,
+                  107,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "address"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "remove_greenlist",
+      "discriminator": [
+        228,
+        80,
+        39,
+        204,
+        110,
+        58,
+        154,
+        22
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "greenlist_entry"
+          ]
+        },
+        {
+          "name": "greenlist_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  114,
+                  101,
+                  101,
+                  110,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "entry_pubkey"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "entry_pubkey",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "remove_swap_pair",
+      "discriminator": [
+        152,
+        140,
+        229,
+        149,
+        112,
+        227,
+        77,
+        80
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "swap_pair_policy"
+          ]
+        },
+        {
+          "name": "swap_pair_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  119,
+                  97,
+                  112,
+                  95,
+                  112,
+                  97,
+                  105,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "mint_a"
+              },
+              {
+                "kind": "arg",
+                "path": "mint_b"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "mint_a",
+          "type": "pubkey"
+        },
+        {
+          "name": "mint_b",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "remove_whitelist",
+      "discriminator": [
+        148,
+        244,
+        73,
+        234,
+        131,
+        55,
+        247,
+        90
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "whitelist_entry"
+          ]
+        },
+        {
+          "name": "whitelist_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  104,
+                  105,
+                  116,
+                  101,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "address"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "revoke_all_sessions",
+      "discriminator": [
+        18,
+        164,
+        208,
+        235,
+        184,
+        190,
+        45,
+        11
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "revoke_session_key",
+      "discriminator": [
+        81,
+        192,
+        32,
+        110,
+        104,
+        116,
+        144,
+        151
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "session_key"
+          ]
+        },
+        {
+          "name": "session_key",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "unfreeze_vault",
+      "discriminator": [
+        145,
+        244,
+        206,
+        234,
+        251,
+        250,
+        116,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_recipient_policy",
+      "discriminator": [
+        247,
+        97,
+        192,
+        122,
+        128,
+        47,
+        199,
+        85
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "recipient_policy"
+          ]
+        },
+        {
+          "name": "recipient_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  105,
+                  112,
+                  105,
+                  101,
+                  110,
+                  116,
+                  95,
+                  112,
+                  111,
+                  108,
+                  105,
+                  99,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "recipient"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "recipient",
+          "type": "pubkey"
+        },
+        {
+          "name": "per_tx_limit_usdc",
+          "type": "u64"
+        },
+        {
+          "name": "daily_limit_usdc",
+          "type": "u64"
+        },
+        {
+          "name": "mode",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "update_vault_config",
+      "discriminator": [
+        122,
+        3,
+        21,
+        222,
+        158,
+        255,
+        238,
+        157
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "relations": [
+            "vault_config"
+          ]
+        },
+        {
+          "name": "vault_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "UpdateVaultConfigParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "withdraw_sol",
+      "discriminator": [
+        145,
+        131,
+        74,
+        136,
+        65,
+        137,
+        42,
+        38
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "destination",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "withdraw_spl",
+      "discriminator": [
+        181,
+        154,
+        94,
+        86,
+        62,
+        115,
+        6,
+        186
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "vault_token_account",
+          "writable": true
+        },
+        {
+          "name": "destination_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BlacklistEntry",
+      "discriminator": [
+        218,
+        179,
+        231,
+        40,
+        141,
+        25,
+        168,
+        189
+      ]
+    },
+    {
+      "name": "GreenlistEntry",
+      "discriminator": [
+        175,
+        13,
+        79,
+        9,
+        251,
+        229,
+        0,
+        255
+      ]
+    },
+    {
+      "name": "RecipientPolicy",
+      "discriminator": [
+        182,
+        177,
+        146,
+        52,
+        243,
+        77,
+        166,
+        188
+      ]
+    },
+    {
+      "name": "SessionKey",
+      "discriminator": [
+        93,
+        186,
+        163,
+        139,
+        160,
+        255,
+        81,
+        112
+      ]
+    },
+    {
+      "name": "SpendingTracker",
+      "discriminator": [
+        28,
+        90,
+        10,
+        66,
+        40,
+        125,
+        34,
+        122
+      ]
+    },
+    {
+      "name": "SwapPairPolicy",
+      "discriminator": [
+        204,
+        66,
+        96,
+        199,
+        136,
+        60,
+        152,
+        238
+      ]
+    },
+    {
+      "name": "Vault",
+      "discriminator": [
+        211,
+        8,
+        232,
+        43,
+        2,
+        152,
+        117,
+        119
+      ]
+    },
+    {
+      "name": "VaultConfig",
+      "discriminator": [
+        99,
+        86,
+        43,
+        216,
+        184,
+        102,
+        119,
+        77
+      ]
+    },
+    {
+      "name": "WhitelistEntry",
+      "discriminator": [
+        51,
+        70,
+        173,
+        81,
+        219,
+        192,
+        234,
+        62
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "ActionExecuted",
+      "discriminator": [
+        116,
+        101,
+        146,
+        36,
+        160,
+        153,
+        182,
+        233
+      ]
+    },
+    {
+      "name": "AllSessionsRevoked",
+      "discriminator": [
+        180,
+        122,
+        205,
+        144,
+        151,
+        100,
+        22,
+        53
+      ]
+    },
+    {
+      "name": "BlacklistUpdated",
+      "discriminator": [
+        246,
+        166,
+        44,
+        25,
+        56,
+        182,
+        121,
+        74
+      ]
+    },
+    {
+      "name": "GreenlistUpdated",
+      "discriminator": [
+        204,
+        167,
+        214,
+        159,
+        217,
+        147,
+        67,
+        189
+      ]
+    },
+    {
+      "name": "OwnerWithdrawal",
+      "discriminator": [
+        244,
+        105,
+        209,
+        100,
+        241,
+        115,
+        54,
+        208
+      ]
+    },
+    {
+      "name": "RecipientPolicyUpdated",
+      "discriminator": [
+        128,
+        131,
+        191,
+        24,
+        232,
+        169,
+        211,
+        190
+      ]
+    },
+    {
+      "name": "SessionKeyClosed",
+      "discriminator": [
+        26,
+        173,
+        240,
+        19,
+        178,
+        107,
+        6,
+        91
+      ]
+    },
+    {
+      "name": "SessionKeyCreated",
+      "discriminator": [
+        242,
+        227,
+        114,
+        120,
+        164,
+        30,
+        58,
+        114
+      ]
+    },
+    {
+      "name": "SessionKeyRevoked",
+      "discriminator": [
+        18,
+        208,
+        143,
+        205,
+        85,
+        72,
+        180,
+        176
+      ]
+    },
+    {
+      "name": "SpendingTrackerInitialized",
+      "discriminator": [
+        121,
+        145,
+        158,
+        7,
+        107,
+        190,
+        69,
+        242
+      ]
+    },
+    {
+      "name": "SwapExecuted",
+      "discriminator": [
+        150,
+        166,
+        26,
+        225,
+        28,
+        89,
+        38,
+        79
+      ]
+    },
+    {
+      "name": "SwapPairUpdated",
+      "discriminator": [
+        80,
+        14,
+        126,
+        19,
+        97,
+        103,
+        46,
+        67
+      ]
+    },
+    {
+      "name": "TransferExecuted",
+      "discriminator": [
+        8,
+        128,
+        224,
+        132,
+        112,
+        216,
+        192,
+        35
+      ]
+    },
+    {
+      "name": "VaultClosed",
+      "discriminator": [
+        238,
+        129,
+        38,
+        228,
+        227,
+        118,
+        249,
+        215
+      ]
+    },
+    {
+      "name": "VaultConfigUpdated",
+      "discriminator": [
+        72,
+        22,
+        37,
+        111,
+        58,
+        30,
+        160,
+        212
+      ]
+    },
+    {
+      "name": "VaultCreated",
+      "discriminator": [
+        117,
+        25,
+        120,
+        254,
+        75,
+        236,
+        78,
+        115
+      ]
+    },
+    {
+      "name": "VaultFrozen",
+      "discriminator": [
+        13,
+        199,
+        172,
+        111,
+        88,
+        10,
+        151,
+        247
+      ]
+    },
+    {
+      "name": "VaultUnfrozen",
+      "discriminator": [
+        128,
+        194,
+        79,
+        155,
+        85,
+        31,
+        226,
+        170
+      ]
+    },
+    {
+      "name": "WhitelistUpdated",
+      "discriminator": [
+        205,
+        110,
+        205,
+        193,
+        238,
+        237,
+        220,
+        22
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "VaultFrozen",
+      "msg": "Vault is frozen - all agent operations are blocked"
+    },
+    {
+      "code": 6001,
+      "name": "SessionKeyRevoked",
+      "msg": "Session key has been revoked"
+    },
+    {
+      "code": 6002,
+      "name": "SessionKeyNonceMismatch",
+      "msg": "Session key nonce does not match vault global nonce - key invalidated"
+    },
+    {
+      "code": 6003,
+      "name": "SessionKeyAgentMismatch",
+      "msg": "Session key signer does not match the agent on the key"
+    },
+    {
+      "code": 6004,
+      "name": "SessionKeyNotYetValid",
+      "msg": "Session key is not yet valid (valid_after is in the future)"
+    },
+    {
+      "code": 6005,
+      "name": "SessionKeyExpired",
+      "msg": "Session key has expired (valid_until has passed)"
+    },
+    {
+      "code": 6006,
+      "name": "OutsideOperatingHours",
+      "msg": "Operation attempted outside allowed operating hours"
+    },
+    {
+      "code": 6007,
+      "name": "CooldownActive",
+      "msg": "Vault is in cooldown period after a large transaction"
+    },
+    {
+      "code": 6008,
+      "name": "AddressBlacklisted",
+      "msg": "Target address is blacklisted - operation permanently denied"
+    },
+    {
+      "code": 6009,
+      "name": "ProgramNotGreenlisted",
+      "msg": "Target program is not on the greenlist"
+    },
+    {
+      "code": 6010,
+      "name": "TokenNotGreenlisted",
+      "msg": "Token mint is not on the greenlist"
+    },
+    {
+      "code": 6011,
+      "name": "RecipientNotWhitelisted",
+      "msg": "Recipient is not on the whitelist"
+    },
+    {
+      "code": 6012,
+      "name": "RecipientRequiresCosign",
+      "msg": "Recipient is not whitelisted and require_cosign_new_recipient is enabled - use cosigned"
+    },
+    {
+      "code": 6013,
+      "name": "PerTxLimitExceeded",
+      "msg": "USDC amount exceeds per-transaction limit"
+    },
+    {
+      "code": 6014,
+      "name": "DailyLimitExceeded",
+      "msg": "USDC amount would exceed daily spending limit"
+    },
+    {
+      "code": 6015,
+      "name": "SessionLimitExceeded",
+      "msg": "USDC amount would exceed session key spending limit"
+    },
+    {
+      "code": 6016,
+      "name": "Tier2ThresholdExceeded",
+      "msg": "USDC amount exceeds Tier 2 threshold - owner co-sign required"
+    },
+    {
+      "code": 6017,
+      "name": "ArithmeticOverflow",
+      "msg": "Arithmetic overflow in spending calculation"
+    },
+    {
+      "code": 6018,
+      "name": "InvalidDayEpoch",
+      "msg": "Provided day_epoch does not match the current UTC day"
+    },
+    {
+      "code": 6019,
+      "name": "TrackerDayMismatch",
+      "msg": "Spending tracker day_epoch does not match current day"
+    },
+    {
+      "code": 6020,
+      "name": "TrackerNotExpired",
+      "msg": "Spending tracker has not expired yet — cannot close"
+    },
+    {
+      "code": 6021,
+      "name": "InvalidSessionKeyWindow",
+      "msg": "Session key valid_until must be after valid_after"
+    },
+    {
+      "code": 6022,
+      "name": "InvalidSessionKeySpendingLimit",
+      "msg": "Session key spending limit must be greater than zero"
+    },
+    {
+      "code": 6023,
+      "name": "InvalidOperatingHoursStart",
+      "msg": "Operating hours start must be less than 86400"
+    },
+    {
+      "code": 6024,
+      "name": "InvalidOperatingHoursEnd",
+      "msg": "Operating hours end must be less than 86400"
+    },
+    {
+      "code": 6025,
+      "name": "UsdcAmountMismatch",
+      "msg": "Declared USDC amount does not match actual Token Program transfer amount"
+    },
+    {
+      "code": 6026,
+      "name": "InsufficientRemainingAccounts",
+      "msg": "Insufficient remaining accounts for policy checks"
+    },
+    {
+      "code": 6027,
+      "name": "TokenInstructionNotAllowed",
+      "msg": "Only Transfer and TransferChecked are allowed for Token Programs"
+    },
+    {
+      "code": 6028,
+      "name": "TokenMintRequired",
+      "msg": "token_mint is required when target is a Token Program"
+    },
+    {
+      "code": 6029,
+      "name": "UsdcSpentExceedsDeclared",
+      "msg": "Actual USDC spent exceeds declared usdc_amount"
+    },
+    {
+      "code": 6030,
+      "name": "UseExecuteActionForTokenTransfers",
+      "msg": "Use execute_action for direct Token Program transfers, not swap"
+    },
+    {
+      "code": 6031,
+      "name": "SystemProgramNotAllowedInSwap",
+      "msg": "System Program cannot be targeted by swap instruction"
+    },
+    {
+      "code": 6032,
+      "name": "TokenAccountAuthorityChanged",
+      "msg": "Token account authority changed during CPI — possible authority theft"
+    },
+    {
+      "code": 6033,
+      "name": "OutputBelowMinimum",
+      "msg": "Swap output amount is below declared minimum"
+    },
+    {
+      "code": 6034,
+      "name": "InvalidTokenAccount",
+      "msg": "Token account data is too short or malformed"
+    },
+    {
+      "code": 6035,
+      "name": "InputMintMismatch",
+      "msg": "Input token account mint does not match declared input_mint"
+    },
+    {
+      "code": 6036,
+      "name": "OutputMintMismatch",
+      "msg": "Output token account mint does not match declared output_mint"
+    },
+    {
+      "code": 6037,
+      "name": "RecipientNotAllowed",
+      "msg": "Recipient is not allowed by any policy or whitelist entry"
+    },
+    {
+      "code": 6038,
+      "name": "RecipientPerTxLimitExceeded",
+      "msg": "Per-recipient per-transaction USDC limit exceeded"
+    },
+    {
+      "code": 6039,
+      "name": "RecipientDailyLimitExceeded",
+      "msg": "Per-recipient daily USDC limit exceeded"
+    },
+    {
+      "code": 6040,
+      "name": "SwapPairNotAllowed",
+      "msg": "Swap pair is not allowed — no SwapPairPolicy exists for this mint pair"
+    },
+    {
+      "code": 6041,
+      "name": "InvalidSwapPairOrder",
+      "msg": "Swap pair mints must be passed in canonical order (mint_a < mint_b by bytes)"
+    },
+    {
+      "code": 6042,
+      "name": "InvalidRecipientPolicyData",
+      "msg": "RecipientPolicy account data is too short or malformed"
+    },
+    {
+      "code": 6043,
+      "name": "InvalidRecipientPolicyMode",
+      "msg": "Invalid recipient policy mode (must be 0=allow or 1=cosign_required)"
+    },
+    {
+      "code": 6044,
+      "name": "RecipientPolicyCosignRequired",
+      "msg": "Recipient policy requires owner co-sign for this recipient"
+    },
+    {
+      "code": 6045,
+      "name": "RecipientMismatch",
+      "msg": "CPI destination account owner does not match declared recipient"
+    },
+    {
+      "code": 6046,
+      "name": "TokenMintMismatch",
+      "msg": "CPI source account mint does not match declared token_mint"
+    },
+    {
+      "code": 6047,
+      "name": "InvalidTokenProgram",
+      "msg": "Invalid token program: must be SPL Token or Token-2022"
+    },
+    {
+      "code": 6048,
+      "name": "SourceMintMismatch",
+      "msg": "Source token account mint does not match token_mint"
+    },
+    {
+      "code": 6049,
+      "name": "DestinationMintMismatch",
+      "msg": "Destination token account mint does not match token_mint"
+    },
+    {
+      "code": 6050,
+      "name": "DestinationOwnerMismatch",
+      "msg": "Destination token account owner does not match recipient"
+    },
+    {
+      "code": 6051,
+      "name": "TypedTransferRequired",
+      "msg": "Token Program transfers must use execute_action_transfer when require_typed_transfers is enabled"
+    },
+    {
+      "code": 6052,
+      "name": "ProgramIsSwapOnly",
+      "msg": "This program is marked swap_only — use execute_action_swap"
+    },
+    {
+      "code": 6053,
+      "name": "SystemProgramNotAllowed",
+      "msg": "System Program cannot be targeted via execute_action — use owner withdraw_sol"
+    }
+  ],
+  "types": [
+    {
+      "name": "ActionExecuted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "target_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "cosigned",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AllSessionsRevoked",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "new_nonce",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BlacklistEntry",
+      "docs": [
+        "Denied address, overrides all other checks.",
+        "PDA existence = membership in the blacklist."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this entry belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "address",
+            "docs": [
+              "Denied address."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BlacklistUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "address",
+            "type": "pubkey"
+          },
+          {
+            "name": "added",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ExecuteActionParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "instruction_data",
+            "type": "bytes"
+          },
+          {
+            "name": "usdc_amount",
+            "type": "u64"
+          },
+          {
+            "name": "recipient",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "token_mint",
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ExecuteSwapParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "instruction_data",
+            "type": "bytes"
+          },
+          {
+            "name": "usdc_amount",
+            "type": "u64"
+          },
+          {
+            "name": "input_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "output_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "minimum_output_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ExecuteTransferParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GreenlistEntry",
+      "docs": [
+        "Token mint or program address the agent is allowed to interact with.",
+        "PDA existence = membership in the greenlist."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this entry belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "pubkey",
+            "docs": [
+              "Token mint address or program address."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "swap_only",
+            "docs": [
+              "If true, this program can only be called via execute_action_swap, not execute_action."
+            ],
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GreenlistUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "pubkey",
+            "type": "pubkey"
+          },
+          {
+            "name": "added",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "OwnerWithdrawal",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "destination",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "is_sol",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecipientPolicy",
+      "docs": [
+        "Per-recipient spending policy with limits and mode control.",
+        "",
+        "Seeds: [b\"recipient_policy\", vault, recipient]",
+        "One PDA per recipient per vault.",
+        "",
+        "Daily accounting is embedded (like SessionKey.amount_spent_usdc).",
+        "When `daily_limit_usdc = 0`, the account is read-only (no write-back needed)."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this policy belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient",
+            "docs": [
+              "The recipient address this policy governs."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "per_tx_limit_usdc",
+            "docs": [
+              "Max USDC per single transaction to this recipient (0 = use vault default)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "daily_limit_usdc",
+            "docs": [
+              "Max USDC per day to this recipient (0 = no per-recipient daily limit)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_spent_today",
+            "docs": [
+              "USDC spent to this recipient today (auto-resets when day_epoch changes)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "day_epoch",
+            "docs": [
+              "Which UTC day the total_spent_today counter belongs to."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "mode",
+            "docs": [
+              "0 = allow (autonomous), 1 = cosign_required (owner must co-sign)."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecipientPolicyUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "per_tx_limit_usdc",
+            "type": "u64"
+          },
+          {
+            "name": "daily_limit_usdc",
+            "type": "u64"
+          },
+          {
+            "name": "mode",
+            "type": "u8"
+          },
+          {
+            "name": "added",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SessionKey",
+      "docs": [
+        "Time-bound, spending-limited permission for an agent to operate the vault."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this session key belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "agent",
+            "docs": [
+              "The agent keypair that can use this session key."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "nonce",
+            "docs": [
+              "Must match vault.global_session_nonce,  mismatch = invalidated."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "valid_after",
+            "docs": [
+              "Unix timestamp after which the key is valid."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "valid_until",
+            "docs": [
+              "Unix timestamp after which the key expires."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "spending_limit_usdc",
+            "docs": [
+              "Maximum USDC this session key is allowed to spend."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "amount_spent_usdc",
+            "docs": [
+              "USDC spent so far using this session key."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "is_revoked",
+            "docs": [
+              "Individually revoked by owner."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SessionKeyClosed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "session_key",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SessionKeyCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "session_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "valid_until",
+            "type": "i64"
+          },
+          {
+            "name": "spending_limit_usdc",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SessionKeyRevoked",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "session_key",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SpendingTracker",
+      "docs": [
+        "Daily USDC spending tracker. One PDA per vault per day.",
+        "Created via `init_tracker`, closed via `close_spent_tracker` to reclaim rent."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this tracker belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "day_epoch",
+            "docs": [
+              "Day identifier: unix_timestamp / 86400."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_spent_usdc",
+            "docs": [
+              "Total USDC spent on this day."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SpendingTrackerInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "day_epoch",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwapExecuted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "target_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "input_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "output_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "input_amount",
+            "type": "u64"
+          },
+          {
+            "name": "output_amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "cosigned",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwapPairPolicy",
+      "docs": [
+        "Pair-level swap restriction. When `VaultConfig.swap_require_pair_policy` is",
+        "true, `execute_action_swap` requires a SwapPairPolicy PDA to exist for the",
+        "(input_mint, output_mint) pair.",
+        "",
+        "Seeds: [b\"swap_pair\", vault, min(mint_a, mint_b), max(mint_a, mint_b)]",
+        "",
+        "Mints are canonically sorted by bytes so USDC/SOL and SOL/USDC resolve to",
+        "the same PDA."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this policy belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_a",
+            "docs": [
+              "Canonically sorted smaller mint."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_b",
+            "docs": [
+              "Canonically sorted larger mint."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwapPairUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_a",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_b",
+            "type": "pubkey"
+          },
+          {
+            "name": "added",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TransferExecuted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "agent",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "cosigned",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UpdateVaultConfigParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "per_tx_limit_usdc",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "daily_limit_usdc",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "operating_hours_start",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "operating_hours_end",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "cooldown_seconds",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "cooldown_threshold_usdc",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "tier2_threshold_usdc",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "require_cosign_new_recipient",
+            "type": {
+              "option": "bool"
+            }
+          },
+          {
+            "name": "swap_require_pair_policy",
+            "type": {
+              "option": "bool"
+            }
+          },
+          {
+            "name": "require_typed_transfers",
+            "type": {
+              "option": "bool"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Vault",
+      "docs": [
+        "Central vault account, multiple per owner (distinguished by vault_index).",
+        "Controls frozen state, session nonce, and identifies the USDC mint."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "The owner who controls this vault (immutable after creation)."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "docs": [
+              "USDC mint address for this network (devnet or mainnet)."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "vault_index",
+            "docs": [
+              "Owner-chosen index for multi-vault support (used in PDA seeds)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "global_session_nonce",
+            "docs": [
+              "Increment to invalidate all active session keys at once."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "is_frozen",
+            "docs": [
+              "When true, all agent operations are blocked."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "session_counter",
+            "docs": [
+              "Monotonic counter for session key creation (used in PDA seeds)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultClosed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultConfig",
+      "docs": [
+        "Vault configuration, spending limits, time controls, tier settings.",
+        "Separate from Vault so updates don't require realloc on the main account."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this config belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "per_tx_limit_usdc",
+            "docs": [
+              "Max USDC per single transaction (0 = no limit). 6 decimals."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "daily_limit_usdc",
+            "docs": [
+              "Max USDC per 24h window (0 = no limit). 6 decimals."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "operating_hours_start",
+            "docs": [
+              "Seconds from midnight UTC when operations begin (u32::MAX = disabled)."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "operating_hours_end",
+            "docs": [
+              "Seconds from midnight UTC when operations end (u32::MAX = disabled)."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "cooldown_seconds",
+            "docs": [
+              "Forced wait in seconds after a large transaction (0 = disabled)."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "cooldown_threshold_usdc",
+            "docs": [
+              "USDC threshold that triggers the cooldown (0 = disabled)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "last_cooldown_trigger",
+            "docs": [
+              "Unix timestamp of when cooldown was last triggered."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "tier2_threshold_usdc",
+            "docs": [
+              "USDC amount above which owner co-sign is required (0 = all Tier 1)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "require_cosign_new_recipient",
+            "docs": [
+              "If true, transfers to non-whitelisted addresses require owner co-sign."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "swap_require_pair_policy",
+            "docs": [
+              "If true, execute_action_swap requires a SwapPairPolicy PDA for the mint pair."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "require_typed_transfers",
+            "docs": [
+              "If true, execute_action/cosigned rejects Token Program targets — must use execute_action_transfer."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultConfigUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultFrozen",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultUnfrozen",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WhitelistEntry",
+      "docs": [
+        "Approved recipient address.",
+        "PDA existence = membership in the whitelist."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this entry belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "address",
+            "docs": [
+              "Approved recipient address."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WhitelistUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "address",
+            "type": "pubkey"
+          },
+          {
+            "name": "added",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ]
+}

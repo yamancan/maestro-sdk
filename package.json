@@ -1,0 +1,66 @@
+{
+  "name": "@trionlabs/maestro-sdk",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.23.0",
+  "description": "TypeScript SDK for the Maestro Agent Policy Engine on Solana",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./idl/agent_policy_engine.json": "./idl/agent_policy_engine.json",
+    "./idl/vault_factory.json": "./idl/vault_factory.json"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run clean && pnpm run build",
+    "test": "npx ts-mocha -p ./tsconfig.test.json tests/**/*.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@solana/web3.js": "^1.98.0",
+    "@solana/spl-token": "^0.4.14"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-mocha": "^10.0.0",
+    "mocha": "^10.0.0",
+    "chai": "^4.3.0",
+    "@types/mocha": "^10.0.0",
+    "@types/chai": "^4.3.0"
+  },
+  "files": [
+    "dist",
+    "idl",
+    "README.md",
+    "LICENSE",
+    "SKILL.md"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trionlabs/maestro.git",
+    "directory": "sdk"
+  },
+  "author": "Trion Labs <contact@trionlabs.dev> (https://trionlabs.dev)",
+  "homepage": "https://github.com/trionlabs/maestro/tree/main/sdk#readme",
+  "keywords": [
+    "solana",
+    "anchor",
+    "agent",
+    "policy-engine",
+    "multisig",
+    "vault",
+    "session-key",
+    "maestro",
+    "trion-labs",
+    "typescript",
+    "web3"
+  ],
+  "license": "MIT"
+}

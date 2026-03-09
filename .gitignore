@@ -1,0 +1,4 @@
+# Override root .gitignore — track SDK skills
+!.claude/
+.claude/*
+!.claude/skills/
